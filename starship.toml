@@ -1,0 +1,102 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+
+# Inserts a blank line between shell prompts
+add_newline = true
+continuation_prompt = "▶▶"
+
+[aws]
+symbol = "☁️  Amazon "
+
+
+[[battery.display]] # "bold red" style and discharging_symbol when capacity is between 0% and 10%
+threshold = 10
+style = "bold red"
+
+[[battery.display]] # "bold yellow" style and 💦 symbol when capacity is between 10% and 30%
+threshold = 30
+style = "bold yellow"
+
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character] # The name of the module we are configuring is "character"
+success_symbol = "[➜](bold green) "
+error_symbol = "[✗](bold red) "
+
+[cmd_duration]
+min_time = 1_000
+show_notifications = true
+min_time_to_notify = 30_000
+
+[directory]
+truncation_symbol = "…/"
+
+# This can be used if it only shows when value for the variable exists.
+# But unfortunately, it always shows. So, it is not ideal to use this. 
+# [env_var.TF_LOG]
+# format = "with [TF_LOG=$env_value]($style) "
+# default = ""
+
+
+[gcloud]
+format = 'using [$symbol$account(@$domain)(\($project\))]($style) '
+
+[git_metrics]
+disabled = false
+only_nonzero_diffs = true
+format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
+
+[git_status]
+conflicted = "🏳"
+up_to_date = "✓"
+
+[kubernetes]
+disabled = false
+detect_files = ['k8s']
+[kubernetes.context_aliases]
+# The following entry matches on the GKE format (`gke_projectname_zone_cluster-name`)
+# and renames every matching kube context into a more readable format (`gke-cluster-name`):
+"gke_.*_(?P<var_cluster>[\\w-]+)" = "gke-$var_cluster"
+
+[localip]
+# This shows the local ip. 
+# Tt is useful, only if you ssh into machines in your local network a lot.
+ssh_only = true
+format = "@[$localipv4]($style) "
+disabled = true
+
+[memory_usage]
+disabled = false
+threshold = 70
+
+[openstack]
+symbol = "☁️  OpenStack "
+
+[python]
+# Only use the `python3` binary to get the version.
+python_binary = ["./venv/bin/python", "python3"]
+
+[shell]
+disabled = false
+
+[status]
+format = '[\[$symbol $common_meaning$signal_name$maybe_int\]]($style) '
+# below format gives exit code instead of common meaning. It is useful for debugging, but not for general usage.
+# format = "[$symbol$status]($style) "
+map_symbol = true
+disabled = false
+
+[sudo]
+disabled = false
+
+[terraform]
+format = "via [$symbol$workspace]($style) "
+
+[time]
+disabled = false
+use_12hr = true
+format = '[ $time ]($style) '
+# time_format = "%T" # for 24-hour setting
+time_format = "%b %e %r" # for 12-hour setting
+time_range = "9:00:00-18:00:00"
