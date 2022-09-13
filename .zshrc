@@ -6,7 +6,7 @@ export ZSH="$HOME/.oh-my-zsh"
 
 
 # oh-my-zsh options
-ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
 ENABLE_CORRECTION="true"
 
 # plugins to be enabled
